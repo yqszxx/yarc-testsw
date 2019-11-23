@@ -1,4 +1,5 @@
 extern volatile int GPIO;
+extern volatile int UART[];
 
 void setGPIO(int s) {
     GPIO = s;
@@ -11,6 +12,8 @@ void main() {
             i = 0;
             state = ~state;
             setGPIO(state);
+            UART[2] = '6';
+            UART[0] = 0x02;
         } else {
             i++;
         }
