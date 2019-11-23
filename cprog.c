@@ -6,16 +6,15 @@ void setGPIO(int s) {
 }
 
 void main() {
-    int i = 0, state = 0;
+    int recv;
     while (1) {
-        if (i == 457143) {
-            i = 0;
-            state = ~state;
-            setGPIO(state);
-            UART[2] = '6';
-            UART[0] = 0x02;
-        } else {
-            i++;
-        }
+        while (!(UART[0] & 0x01)); // wait for data
+        UART[0] = 0;
+        UART[0] = 0;
+        recv = UART[1];
+        setGPIO(recv);
+        UART[2] = '0' + recv;
+        UART[0] = 0x02;
+        while (UART[0] & 0x02); // wait for tx done
     }
 }
