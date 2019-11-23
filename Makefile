@@ -26,4 +26,14 @@ crun: build/cprog
 	$(EMULATOR) $< 2>/dev/null
 
 cdump: build/cprog
+	$(EMULATOR) $< d
+
+cdasm: build/cprog
 	$(TOOLCHAIN)objdump -d $<
+
+build/cprog.hex: build/cprog
+	$(TOOLCHAIN)objcopy -O ihex $< $@
+
+chex: build/cprog.hex
+	cat build/cprog.hex
+
