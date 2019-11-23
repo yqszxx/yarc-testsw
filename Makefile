@@ -16,8 +16,8 @@ srun: build/sprog
 sdump: build/sprog
 	$(TOOLCHAIN)objdump -d $<
 
-build/cprog: cprog.c link.ld
-	$(TOOLCHAIN)gcc -march=rv32i -mabi=ilp32 -static -mcmodel=medany -fvisibility=hidden -nostdlib -nostartfiles -o $@ -T link.ld $<
+build/cprog: cprog.c _start.s link.ld
+	$(TOOLCHAIN)gcc -march=rv32i -mabi=ilp32 -static -mcmodel=medany -fvisibility=hidden -nostdlib -nostartfiles -o $@ -T link.ld _start.s $<
 
 cdebug: build/cprog
 	$(EMULATOR) $<
