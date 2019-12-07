@@ -1,18 +1,33 @@
-DONE = 0xFFFFFFFF;
-GPIO = 0xFE000000;
-UART = 0xFD000000;
+OUTPUT_ARCH( "riscv" )
+
+ENTRY( main )
+
+MEMORY
+{
+  ram (wxa!ri) : ORIGIN = 0x80000000, LENGTH = 16K
+}
+
+PHDRS
+{
+  ram PT_LOAD;
+}
 
 SECTIONS
 {
-  . = 0;
-  .text : {
+  .text :
+  {
     *(.text)
-  }
-  . = 0x01000000;
-  .data : { *(.data) }
-  .bss : {
+  } >ram AT>ram :ram
+
+  .data :
+  {
+    *(.data)
+  } >ram AT>ram :ram
+
+  .bss :
+  {
     *(.bss)
-    PROVIDE(STACK = 0x1FF);
-  }
+    . = ALIGN(4);
+  } >ram AT>ram :ram
 }
 
