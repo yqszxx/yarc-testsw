@@ -84,9 +84,11 @@ int gets(char *s) {
 void main() {
     init();
     int i = 0;
+    puts("To everyone's suprise, I'm actually running!!!\n");
     while (1) {
         setLED(i);
         delay(1000);
         i = ~i;
+        puts(i ? "Ping!\n" : "Pong~\n");
     }
 }
