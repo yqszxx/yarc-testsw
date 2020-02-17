@@ -1,5 +1,5 @@
-TOOLCHAIN=/opt/riscv64-unknown-elf-gcc-8.2.0-2019.05.3-x86_64-linux-ubuntu14/bin/riscv64-unknown-elf-
-EMULATOR=/mnt/hgfs/Exchange/go_build_main_go
+TOOLCHAIN=/opt/riscv64-unknown-elf-gcc-8.3.0-2019.08.0-x86_64-linux-ubuntu14/bin/riscv64-unknown-elf-
+EMULATOR=../yars.exe
 
 build/sprog.o: sprog.s
 	$(TOOLCHAIN)as -march=rv32i -mabi=ilp32 -o $@ $<
